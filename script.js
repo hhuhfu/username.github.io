@@ -79,3 +79,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+// ... (весь твой текущий код newsData) ...
+
+function loadNews(category) {
+    const newsContainer = document.querySelector(`#${category} .news-container`);
+    newsContainer.innerHTML = '';
+
+    // Удаляем активный класс со всех ссылок навигации
+    document.querySelectorAll('nav ul li a').forEach(link => {
+        link.classList.remove('active');
+    });
+
+    // Добавляем активный класс к текущей выбранной ссылке
+    document.querySelector(`nav ul li a[data-category="${category}"]`).classList.add('active');
+
+
+    if (newsData[category]) {
+        newsData[category].forEach(news => {
+            const articleDiv = document.createElement('div');
+            articleDiv.classList.add('news-article');
+            articleDiv.innerHTML = `
+                <h3><span class="math-inline">\{news\.title\}</h3\>
